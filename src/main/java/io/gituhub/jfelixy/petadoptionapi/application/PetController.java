@@ -18,10 +18,11 @@ public class PetController {
     private static final Logger log = LoggerFactory.getLogger(PetController.class);
     @PostMapping
     public ResponseEntity save(@RequestParam("name") String name,
-                               @RequestParam("age") int age,
+                               @RequestParam("age") String age,
                                @RequestParam("tags") List<String> tags
                                ){
         log.info("Pet Received: name: {}, age: {}, tags: {}",name, age, String.join(",", tags));
         return ResponseEntity.ok().build();
     }
+
 }

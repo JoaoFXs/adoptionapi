@@ -1,0 +1,113 @@
+{
+        "$schema": "http://json-schema.org/draft-07/schema#",  // Defining the version of the JSON Schema standard
+        "type": "object",  // The main type is an object
+        "properties": {  // Defining the properties that the object can have
+                "id": {
+                        "type": "string"  // 'id' is a string (unique identifier for the pet)
+                },
+                "name": {
+                        "type": "string"  // 'name' is a string (the pet's name)
+                },
+                "type": {
+                        "type": "string"  // 'type' is a string (the type of pet, e.g., "dog", "cat", etc.)
+                },
+                "breed": {
+                        "type": "string"  // 'breed' is a string (the pet's breed)
+                },
+                "sex": {
+                        "type": "string"  // 'sex' is a string (the pet's sex, e.g., "male" or "female")
+                },
+                "age": {
+                        "type": "string"  // 'age' is a string (the pet's age, can be in years or a birthdate)
+                },
+                "size": {
+                        "type": "string"  // 'size' is a string (the pet's size, e.g., "small", "medium", "large")
+                },
+                "weight": {
+                        "type": "number",  // 'weight' is a number (the pet's weight, in kg)
+                        "minimum": 0  // Weight must be greater than or equal to 0
+                },
+                "photo": {
+                        "type": "object",
+                        "properties": {
+                                "photo": {
+                                        "type": "string",
+                                        "format": "uri",  // O campo photo é um URL de uma imagem.
+                                        "description": "URL of the pet's photo, uploaded via multipart file."
+                                }
+                        }
+                },
+                "neutered": {
+                        "type": "boolean"  // 'neutered' is a boolean value (indicates whether the pet is neutered)
+                },
+                "vaccinated": {
+                        "type": "boolean"  // 'vaccinated' is a boolean value (indicates whether the pet is vaccinated)
+                },
+                "dewormed": {
+                        "type": "boolean"  // 'dewormed' is a boolean value (indicates whether the pet is dewormed)
+                },
+                "diseases": {
+                        "type": "array",  // 'diseases' is an array (list of diseases the pet has)
+                        "items": {
+                                "type": "string"  // Each item in the list is a string (name of the disease or condition)
+                        }
+                },
+                "special_needs": {
+                        "type": "string"  // 'special_needs' is a string (special care information, if any)
+                },
+                "temperament": {
+                        "type": "string"  // 'temperament' is a string (the pet's temperament, e.g., "friendly", "shy", etc.)
+                },
+                "social_with": {
+                        "type": "string"  // 'social_with' is a string (social compatibility of the pet, e.g., "children", "cats", etc.)
+                },
+                "trained": {
+                        "type": "boolean"  // 'trained' is a boolean value (indicates whether the pet is trained, e.g., to use the bathroom in the right place)
+                },
+                "available": {
+                        "type": "boolean"  // 'available' is a boolean value (indicates if the pet is available for adoption)
+                },
+                "availability_date": {
+                        "type": "string",  // 'availability_date' is a string (date the pet became available for adoption)
+                        "format": "date"  // The format must be a valid date
+                },
+                "adopted_by": {
+                        "type": "string",  // 'adopted_by' is a string (ID of the adopter, if applicable)
+                        "minOccurs": 0  // Optional, as the pet may not have been adopted yet
+                },
+                "adoption_date": {
+                        "type": "string",  // 'adoption_date' is a string (adoption date, if the pet has been adopted)
+                        "format": "date",  // The format must be a valid date
+                        "minOccurs": 0  // Optional, as the pet may not have been adopted yet
+                },
+                "rescue_location": {
+                        "type": "string"  // 'rescue_location' is a string (where the pet was rescued from, e.g., city or shelter)
+                },
+                "history": {
+                        "type": "string"  // 'history' is a string (history of the pet, e.g., "rescued from the street")
+                },
+                "notes": {
+                        "type": "string"  // 'notes' is a string (free text for additional notes)
+                },
+                "microchip": {
+                        "type": "string",  // 'microchip' is a string (microchip number, if the pet has one)
+                        "minOccurs": 0  // Optional
+                },
+                "shelter": {
+                        "type": "string"  // 'shelter' is a string (name or ID of the shelter where the pet is)
+                },
+                "caretaker": {
+                        "type": "string"  // 'caretaker' is a string (person responsible for the pet, if the system is used by multiple shelters)
+                },
+                "tags": {
+                        "type": "array",  // 'tags' is an array (list of tags associated with the pet, e.g., "playful", "needs yard")
+                        "items": {
+                                "type": "string"  // Each tag is a string
+                        }
+                }
+        },
+        "required": [  // Required fields
+                "id", "name", "type", "breed", "sex", "age", "size", "photo",
+                "available", "availability_date", "rescue_location", "history"
+        ]
+}
