@@ -1,5 +1,7 @@
 package io.gituhub.jfelixy.petadoptionapi.domain.enums;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 
 public enum SexEnum {
@@ -7,6 +9,7 @@ public enum SexEnum {
     MALE("male"),
     FEMALE("female");
 
+    @Getter
     private String sex;
 
     SexEnum(String sex){
