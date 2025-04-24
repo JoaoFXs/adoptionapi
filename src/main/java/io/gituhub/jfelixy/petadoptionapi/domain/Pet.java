@@ -2,6 +2,7 @@ package io.gituhub.jfelixy.petadoptionapi.domain;
 
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SizeEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.TemperamentEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.TypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
