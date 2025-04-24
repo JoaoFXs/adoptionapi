@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_container_pets
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: pets
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+    ports:
+      - "15432:80"
+    depends_on:
+      - db

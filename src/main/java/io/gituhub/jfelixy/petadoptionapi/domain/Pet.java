@@ -1,5 +1,9 @@
 package io.gituhub.jfelixy.petadoptionapi.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +26,9 @@ public class Pet {
 
     @Column
     private String name;
+
+    @Column
+    private int age;
 
     @Column
     @Enumerated(EnumType.STRING)

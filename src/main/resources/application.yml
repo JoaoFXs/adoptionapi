@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: petadoptionapi
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pets
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
