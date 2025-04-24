@@ -1,5 +1,7 @@
 package io.gituhub.jfelixy.petadoptionapi.domain;
 
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.SizeEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.TypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,11 +42,11 @@ public class Pet {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private SexAnimalsEnum sex;
+    private SexEnum sex;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private SizeAnimalsEnum size;
+    private SizeEnum size;
 
     @Column
     private Double weight;
