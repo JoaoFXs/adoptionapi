@@ -1,5 +1,6 @@
 package io.gituhub.jfelixy.petadoptionapi.domain;
 
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.TypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +33,7 @@ public class Pet {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private TypeAnimalsEnum type;
+    private TypeEnum type;
 
     @Column
     private boolean breed;
