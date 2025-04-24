@@ -90,14 +90,11 @@
                         "type": "string"  // 'notes' is a string (free text for additional notes)
                 },
                 "microchip": {
-                        "type": "string",  // 'microchip' is a string (microchip number, if the pet has one)
+                        "type": "integer",  // 'microchip' is a string (microchip number, if the pet has one)
                         "minOccurs": 0  // Optional
                 },
                 "shelter": {
                         "type": "string"  // 'shelter' is a string (name or ID of the shelter where the pet is)
-                },
-                "caretaker": {
-                        "type": "string"  // 'caretaker' is a string (person responsible for the pet, if the system is used by multiple shelters)
                 },
                 "tags": {
                         "type": "array",  // 'tags' is an array (list of tags associated with the pet, e.g., "playful", "needs yard")
