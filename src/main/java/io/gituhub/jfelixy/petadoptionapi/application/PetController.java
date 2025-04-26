@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.util.List;
@@ -20,7 +21,8 @@ public class PetController {
     private PetService service;
     private static final Logger log = LoggerFactory.getLogger(PetController.class);
     @PostMapping
-    public ResponseEntity save(@RequestBody Pet pet){
+    public ResponseEntity save(@RequestParam("file") MultipartFile file,
+                               @RequestBody Pet pet){
 
         Pet petSaved = service.save(pet);
         //log.info("Pet Received: name: {}, age: {}, tags: {}",pet.getName(), pet., String.join(",", tags));
