@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,9 +23,19 @@ public class PetController {
     public ResponseEntity save(@RequestBody Pet pet){
 
         Pet petSaved = service.save(pet);
-
         //log.info("Pet Received: name: {}, age: {}, tags: {}",pet.getName(), pet., String.join(",", tags));
+
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    public ResponseEntity<List<PetDTO>> search(
+            @RequestParam(value="available", required = false) String available,
+            @RequestParam(value="query", required = false) String query){
+            return null;
+
+    }
+
+
 
 }

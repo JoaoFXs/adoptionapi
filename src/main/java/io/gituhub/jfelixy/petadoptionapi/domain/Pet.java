@@ -101,10 +101,6 @@ public class Pet {
     private boolean microchip;
 
     @Column
-    @Enumerated
-    private ShelterEnum shelter;
-
-    @Column
     private String notes;
 
     @Column
