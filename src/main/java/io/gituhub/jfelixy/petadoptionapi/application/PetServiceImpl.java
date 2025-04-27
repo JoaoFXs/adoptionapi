@@ -6,6 +6,8 @@ import io.gituhub.jfelixy.petadoptionapi.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PetServiceImpl implements PetService {
 
@@ -13,9 +15,11 @@ public class PetServiceImpl implements PetService {
     private PetRepository repository;
 
     @Override
-    public Pet save(Pet pet) {
+    public Pet save(Pet pet) {return repository.save(pet);}
 
-        return repository.save(pet);
+    @Override
+    public List<Pet> search(String available, String query) {
+        return repository.findByAvailableAndNameOrTagsLike(available, query);
     }
 
 }

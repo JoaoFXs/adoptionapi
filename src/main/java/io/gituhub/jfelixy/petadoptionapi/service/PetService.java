@@ -8,6 +8,6 @@ public interface PetService {
 
     Pet save(Pet pet);
 
-    List<Pet> search(String available, String )
+    List<Pet> search(String available, String query);
 
 }

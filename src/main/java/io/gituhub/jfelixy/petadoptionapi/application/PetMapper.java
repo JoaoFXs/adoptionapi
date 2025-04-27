@@ -12,16 +12,34 @@ public class PetMapper {
     private Pet petMapperDefault(MultipartFile file, Pet pet){
         try {
            Pet petMapped = Pet
-                    .builder()
-                    .age(pet.getAge())
-                    .breed(pet.isBreed())
-                    .adoptedBy(pet.getAdoptedBy())
-                    .adoptionDate(pet.getAdoptionDate())
-                    .availabilityDate(pet.getAvailabilityDate())
-                    .available(pet.isAvailable())
-                    .name(pet.getName())
-                    .photo(file.getBytes())
-                    .build();
+                   .builder()
+                   .id(pet.getId())
+                   .name(pet.getName())
+                   .age(pet.getAge())
+                   .type(pet.getType())
+                   .breed(pet.isBreed())
+                   .sex(pet.getSex())
+                   .size(pet.getSize())
+                   .weight(pet.getWeight())
+                   .photo(file.getBytes())
+                   .neutered(pet.isNeutered())
+                   .vaccinated(pet.isVaccinated())
+                   .dewormed(pet.isDewormed())
+                   .diseases(pet.getDiseases())
+                   .specialNeeds(pet.getSpecialNeeds())
+                   .temperament(pet.getTemperament())
+                   .socialWith(pet.getSocialWith())
+                   .available(pet.isAvailable())
+                   .availabilityDate(pet.getAvailabilityDate())
+                   .adoptedBy(pet.getAdoptedBy())
+                   .adoptionDate(pet.getAdoptionDate())
+                   .rescueLocation(pet.getRescueLocation())
+                   .history(pet.getHistory())
+                   .microchip(pet.isMicrochip())
+                   .notes(pet.getNotes())
+                   .tags(pet.getTags())
+                   .build()
+                   ;
         return petMapped;
         } catch (IOException e) {
             throw new RuntimeException(e);
