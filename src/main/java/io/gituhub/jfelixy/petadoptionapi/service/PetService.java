@@ -3,6 +3,7 @@ package io.gituhub.jfelixy.petadoptionapi.service;
 import io.gituhub.jfelixy.petadoptionapi.domain.Pet;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PetService {
 
@@ -10,4 +11,5 @@ public interface PetService {
 
     List<Pet> search(String available, String query);
 
+    Optional<Pet> findByID(String id);//Optional determin that pet must be optional exists or not
 }

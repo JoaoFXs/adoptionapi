@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PetServiceImpl implements PetService {
@@ -21,6 +22,11 @@ public class PetServiceImpl implements PetService {
     public List<Pet> search(String available, String query) {
         return null;
         //return repository.findByAvailableAndNameOrTagsLike(available, query);
+    }
+
+    @Override
+    public Optional<Pet> findByID(String id) {
+        return repository.findById(id);
     }
 
 }

@@ -6,12 +6,20 @@ import io.gituhub.jfelixy.petadoptionapi.service.PetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URLConnection;
 import java.util.List;
 
 @RestController
@@ -44,8 +52,30 @@ public class PetController {
             return null;
 
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
+        var possibleImage = service.findByID(id);
+
+        if(possibleImage.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        byte[] image = possibleImage.get().getPhoto();
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(detectMediaType(image));
+        header.setContentDispositionFormData("inline", "image");
+        return new ResponseEntity<>(image, header, HttpStatus.OK);
+    }
 
 
+    private MediaType detectMediaType(byte[] imageBytes) throws IOException, IOException {
+        try (InputStream is = new ByteArrayInputStream(imageBytes)) {
+            String mimeType = URLConnection.guessContentTypeFromStream(is);
+            if (mimeType == null) {
+                return MediaType.APPLICATION_OCTET_STREAM;
+            }
+            return MediaType.parseMediaType(mimeType);
+        }
+    }
     private URI buildPetImageURL(Pet pet){
         String imagePath = "/" + pet.getId();
 
