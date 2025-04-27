@@ -19,7 +19,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<Pet> search(String available, String query) {
-        return repository.findByAvailableAndNameOrTagsLike(available, query);
+        return null;
+        //return repository.findByAvailableAndNameOrTagsLike(available, query);
     }
 
 }

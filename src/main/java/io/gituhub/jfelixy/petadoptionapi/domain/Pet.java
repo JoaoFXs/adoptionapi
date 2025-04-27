@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Entity
 @Table(name= "pets")
@@ -52,9 +53,15 @@ public class Pet {
     @Column
     private Double weight;
 
+    @Transient    // This field is not persisted in the database
+    private String photoBase64;  // Base64 encoded photo (string)
+
     @Column
     @Lob
-    private byte[] photo;
+    private byte[] photo;  // Actual photo as byte array
+
+
+
 
     @Column
     private boolean neutered;
