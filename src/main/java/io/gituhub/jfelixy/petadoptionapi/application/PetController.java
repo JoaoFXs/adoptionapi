@@ -30,8 +30,7 @@ public class PetController {
 
     private static final Logger log = LoggerFactory.getLogger(PetController.class);
     @PostMapping
-    public ResponseEntity save(@RequestBody Pet pet){
-
+    public ResponseEntity savePet(@RequestBody Pet pet){
 
         Pet petT = mapper.petMapperDefault(pet);
 
@@ -44,7 +43,7 @@ public class PetController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PetDTO>> search(
+    public ResponseEntity<List<PetDTO>> searchPets(
             @RequestParam(value="available", required = false) String available,
             @RequestParam(value="query", required = false) String query){
             return null;

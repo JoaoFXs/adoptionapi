@@ -12,7 +12,13 @@ import java.util.Base64;
 public class PetMapper {
 
     public Pet petMapperDefault(Pet pet){
-        System.out.println(base64toByte(pet.getPhotoBase64()));
+        byte[] photoByte;
+
+        if(pet.getPhoto() == null && pet.getPhotoBase64() != null){
+            photoByte = base64toByte(pet.getPhotoBase64());
+        }else{
+            photoByte = pet.getPhoto();
+        }
         Pet petMapped = Pet
                 .builder()
                 .id(pet.getId())
@@ -23,7 +29,7 @@ public class PetMapper {
                 .sex(pet.getSex())
                 .size(pet.getSize())
                 .weight(pet.getWeight())
-                .photo(base64toByte(pet.getPhotoBase64()))
+                .photo(photoByte)
                 .neutered(pet.isNeutered())
                 .vaccinated(pet.isVaccinated())
                 .dewormed(pet.isDewormed())
