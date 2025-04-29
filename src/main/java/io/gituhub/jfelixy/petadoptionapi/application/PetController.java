@@ -6,10 +6,7 @@ import io.gituhub.jfelixy.petadoptionapi.service.PetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.function.ServerRequest;
@@ -21,6 +18,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/v1/pet")
@@ -53,32 +51,45 @@ public class PetController {
 
     }
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
-        var possibleImage = service.findByID(id);
-
-        if(possibleImage.isEmpty()){
+    public ResponseEntity<byte[]> getPetImage(@PathVariable String id) {
+        var possibleResponsePet = service.findByID(id);
+        if(possibleResponsePet.isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        byte[] image = possibleImage.get().getPhoto();
+        Pet ResponsePet = possibleResponsePet.get();
+        byte[] image = ResponsePet.getPhoto();
+        if(image == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<>(image, createHeader(ResponsePet), HttpStatus.OK);
+    }
+
+    private HttpHeaders createHeader(Pet responsePet){
+        MediaType mediaType = detectMediaType(responsePet.getPhoto());
         HttpHeaders header = new HttpHeaders();
-        header.setContentType(detectMediaType(image));
-        header.setContentDispositionFormData("inline", "image");
-        return new ResponseEntity<>(image, header, HttpStatus.OK);
+        header.setContentType(mediaType);
+        header.setContentDisposition(ContentDisposition.inline().filename(responsePet.getName()).build());
+        header.setCacheControl(CacheControl.maxAge(1,TimeUnit.HOURS).mustRevalidate());
+        header.setContentLength(responsePet.getPhoto().length);
+        return header;
     }
 
 
-    private MediaType detectMediaType(byte[] imageBytes) throws IOException, IOException {
+    private MediaType detectMediaType(byte[] imageBytes){
+
         try (InputStream is = new ByteArrayInputStream(imageBytes)) {
             String mimeType = URLConnection.guessContentTypeFromStream(is);
             if (mimeType == null) {
                 return MediaType.APPLICATION_OCTET_STREAM;
             }
             return MediaType.parseMediaType(mimeType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
     }
     private URI buildPetImageURL(Pet pet){
         String imagePath = "/" + pet.getId();
-
         return ServletUriComponentsBuilder.fromCurrentRequestUri().path(imagePath).build().toUri();
     }
 
