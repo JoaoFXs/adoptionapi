@@ -19,6 +19,7 @@ import java.net.URI;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/pet")
@@ -44,28 +45,18 @@ public class PetController {
 
     @GetMapping
     public ResponseEntity<List<PetDTO>> searchPets(
-            @RequestParam(value="available", required = false) boolean available,
+            @RequestParam(value="available", required = false) String available,
             @RequestParam(value="query", required = false) String query){
         var result = service.search(available, query);
 
-            return null;
+        var  pets = result.stream().map(pet -> {
+            var url = buildPetImageURL(pet);
+            return mapper.petMapperDTO(pet, url.toString());
+        }).collect(java.util.stream.Collectors.toList());
+        return ResponseEntity.ok(pets);
 
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<ImageDTO>> search(
-//            @RequestParam(value = "extension", required = false, defaultValue = "") String extension,
-//            @RequestParam(value = "query", required = false) String query){
-//        //Returns a list of images found through the extension or query
-//        var result = service.search(ImageExtension.ofName(extension), query);
-//        //Iterates through each image, retrieves their URLs, builds the DTO, and finally organizes them into a list of images for return
-//        var images = result.stream().map(image -> {
-//            var url = buildImageURL(image);
-//            return mapper.imageToDTO(image, url.toString());
-//        }).collect(java.util.stream.Collectors.toList());
-//
-//        return ResponseEntity.ok(images);
-//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getPetImage(@PathVariable String id) {

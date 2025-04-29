@@ -9,4 +9,14 @@ public class PetSpecs {
     public static Specification<Pet> availableEqual(boolean available){
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("available"),available);
     }
+
+    public static Specification<Pet> nameLike(String query){
+        return (root, q, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.upper(root.get("name")), "%" + query.toUpperCase() + "%");
+
+    }
+
+    public static Specification<Pet> tagsLike(String query){
+        return (root, q, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.upper(root.get("tags")), "%" + query.toUpperCase() + "%");
+    }
+
 }

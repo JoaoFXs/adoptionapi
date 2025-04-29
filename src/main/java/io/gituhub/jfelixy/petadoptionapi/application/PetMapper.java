@@ -51,6 +51,41 @@ public class PetMapper {
         return petMapped;
     }
 
+
+    public PetDTO petMapperDTO(Pet pet, String url){
+
+        PetDTO petMapped = PetDTO
+                .builder()
+                .url(url)
+                .name(pet.getName())
+                .age(pet.getAge())
+                .type(pet.getType().name())
+                .breed(pet.isBreed())
+                .sex(pet.getSex().name())
+                .size(pet.getSize().name())
+                .weight(pet.getWeight())
+                .photo(pet.getPhoto())
+                .neutered(pet.isNeutered())
+                .vaccinated(pet.isVaccinated())
+                .dewormed(pet.isDewormed())
+                .diseases(pet.getDiseases())
+                .specialNeeds(pet.getSpecialNeeds())
+                .temperament(pet.getTemperament().name())
+                .socialWith(pet.getSocialWith())
+                .available(pet.isAvailable())
+                .availabilityDate(pet.getAvailabilityDate())
+                .adoptedBy(pet.getAdoptedBy())
+                .adoptionDate(pet.getAdoptionDate())
+                .rescueLocation(pet.getRescueLocation())
+                .history(pet.getHistory())
+                .microchip(pet.isMicrochip())
+                .notes(pet.getNotes())
+                .tags(pet.getTags())
+                .build()
+                ;
+        return petMapped;
+    }
+
     public byte[] base64toByte(String base64){
         return Base64.getDecoder().decode(base64);
     }

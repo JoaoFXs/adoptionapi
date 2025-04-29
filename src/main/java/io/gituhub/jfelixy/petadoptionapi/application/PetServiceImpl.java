@@ -19,7 +19,7 @@ public class PetServiceImpl implements PetService {
     public Pet save(Pet pet) {return repository.save(pet);}
 
     @Override
-    public List<Pet> search(boolean available, String query) {
+    public List<Pet> search(String available, String query) {
         return repository.findByAvailableAndNameOrTagsLike(available, query);
     }
 
