@@ -44,11 +44,29 @@ public class PetController {
 
     @GetMapping
     public ResponseEntity<List<PetDTO>> searchPets(
-            @RequestParam(value="available", required = false) String available,
+            @RequestParam(value="available", required = false) boolean available,
             @RequestParam(value="query", required = false) String query){
+        var result = service.search(available, query);
+
             return null;
 
     }
+
+//    @GetMapping
+//    public ResponseEntity<List<ImageDTO>> search(
+//            @RequestParam(value = "extension", required = false, defaultValue = "") String extension,
+//            @RequestParam(value = "query", required = false) String query){
+//        //Returns a list of images found through the extension or query
+//        var result = service.search(ImageExtension.ofName(extension), query);
+//        //Iterates through each image, retrieves their URLs, builds the DTO, and finally organizes them into a list of images for return
+//        var images = result.stream().map(image -> {
+//            var url = buildImageURL(image);
+//            return mapper.imageToDTO(image, url.toString());
+//        }).collect(java.util.stream.Collectors.toList());
+//
+//        return ResponseEntity.ok(images);
+//    }
+
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getPetImage(@PathVariable String id) {
         var possibleResponsePet = service.findByID(id);
