@@ -2,14 +2,16 @@ package io.gituhub.jfelixy.petadoptionapi.application;
 
 
 import io.gituhub.jfelixy.petadoptionapi.domain.Pet;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.SizeEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.TemperamentEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.TypeEnum;
 import io.gituhub.jfelixy.petadoptionapi.service.PetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.ByteArrayInputStream;
@@ -18,8 +20,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/pet")
@@ -72,6 +74,17 @@ public class PetController {
         return new ResponseEntity<>(image, createHeader(ResponsePet), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity updatePet(@RequestBody PetUpdateDTO petUpdated, @PathVariable String id){
+        var possiblePet = service.findByID(id);
+
+        if (possiblePet.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatePetFromDto(possiblePet.get(), petUpdated));
+    }
+
+    @DeleteMapping("/{id}")
 
 
     private HttpHeaders createHeader(Pet responsePet){
@@ -101,6 +114,34 @@ public class PetController {
     private URI buildPetImageURL(Pet pet){
         String imagePath = "/" + pet.getId();
         return ServletUriComponentsBuilder.fromCurrentRequestUri().path(imagePath).build().toUri();
+    }
+
+    public Pet updatePetFromDto(Pet pet, PetUpdateDTO dto) {
+        if (dto.getName() != null) pet.setName(dto.getName());
+        if (dto.getAge() != null) pet.setAge(dto.getAge());
+        if (dto.getType() != null) pet.setType(TypeEnum.valueOf(dto.getType()));
+        if (dto.getBreed() != null) pet.setBreed(dto.getBreed());
+        if (dto.getSex() != null) pet.setSex(SexEnum.valueOf(dto.getSex()));
+        if (dto.getSize() != null) pet.setSize(SizeEnum.valueOf(dto.getSize()));
+        if (dto.getWeight() != null) pet.setWeight(dto.getWeight());
+        if (dto.getPhoto() != null) pet.setPhoto(dto.getPhoto());
+        if (dto.getNeutered() != null) pet.setNeutered(dto.getNeutered());
+        if (dto.getVaccinated() != null) pet.setVaccinated(dto.getVaccinated());
+        if (dto.getDewormed() != null) pet.setDewormed(dto.getDewormed());
+        if (dto.getDiseases() != null) pet.setDiseases(dto.getDiseases());
+        if (dto.getSpecialNeeds() != null) pet.setSpecialNeeds(dto.getSpecialNeeds());
+        if (dto.getTemperament() != null) pet.setTemperament(TemperamentEnum.valueOf(dto.getTemperament()));
+        if (dto.getSocialWith() != null) pet.setSocialWith(dto.getSocialWith());
+        if (dto.getAvailable() != null) pet.setAvailable(dto.getAvailable());
+        if (dto.getAvailabilityDate() != null) pet.setAvailabilityDate(dto.getAvailabilityDate());
+        if (dto.getAdoptedBy() != null) pet.setAdoptedBy(dto.getAdoptedBy());
+        if (dto.getAdoptionDate() != null) pet.setAdoptionDate(dto.getAdoptionDate());
+        if (dto.getRescueLocation() != null) pet.setRescueLocation(dto.getRescueLocation());
+        if (dto.getHistory() != null) pet.setHistory(dto.getHistory());
+        if (dto.getMicrochip() != null) pet.setMicrochip(dto.getMicrochip());
+        if (dto.getNotes() != null) pet.setNotes(dto.getNotes());
+        if (dto.getTags() != null) pet.setTags(dto.getTags());
+        return service.save(pet);
     }
 
 }
