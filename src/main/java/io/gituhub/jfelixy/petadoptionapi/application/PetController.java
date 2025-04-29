@@ -85,7 +85,10 @@ public class PetController {
     }
 
     @DeleteMapping("/{id}")
-
+    public ResponseEntity deletePet(@PathVariable String id){
+        service.delete(id);
+        return ResponseEntity.ok().build();
+    }
 
     private HttpHeaders createHeader(Pet responsePet){
         MediaType mediaType = detectMediaType(responsePet.getPhoto());

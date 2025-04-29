@@ -28,4 +28,9 @@ public class PetServiceImpl implements PetService {
         return repository.findById(id);
     }
 
+    @Override
+    public void delete(String id) {
+        repository.deleteById(id);
+    }
+
 }

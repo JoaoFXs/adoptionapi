@@ -12,4 +12,6 @@ public interface PetService {
     List<Pet> search(String available, String query);
 
     Optional<Pet> findByID(String id);//Optional determin that pet must be optional exists or not
+
+    void delete(String id);
 }
