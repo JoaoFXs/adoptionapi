@@ -72,6 +72,8 @@ public class PetController {
         return new ResponseEntity<>(image, createHeader(ResponsePet), HttpStatus.OK);
     }
 
+
+
     private HttpHeaders createHeader(Pet responsePet){
         MediaType mediaType = detectMediaType(responsePet.getPhoto());
         HttpHeaders header = new HttpHeaders();
