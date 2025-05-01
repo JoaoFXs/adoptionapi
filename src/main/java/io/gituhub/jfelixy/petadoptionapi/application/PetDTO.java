@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class PetDTO {
+    private String id;
     private String url;
     private String name;
     private int age;

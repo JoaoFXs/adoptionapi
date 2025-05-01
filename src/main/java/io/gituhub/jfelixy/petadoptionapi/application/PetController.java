@@ -131,10 +131,14 @@ public class PetController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity deletePet(@PathVariable String id){
-        if (!service.findByID(id).isPresent()){
+        var pet = service.findByID(id);
+
+
+        if (!pet.isPresent()){
             return ResponseEntity.notFound().build();
         }
         service.delete(id);
+        log.info("The user deleted the following pet {} with id {}", pet.get().getName(), pet.get().getId());
         return ResponseEntity.ok().build();
     }
 

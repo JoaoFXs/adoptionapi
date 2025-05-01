@@ -76,6 +76,7 @@ public class PetMapper {
         // Build and return the PetDTO object using the builder pattern
         PetDTO petMapped = PetDTO
                 .builder()
+                .id(pet.getId())
                 .url(url)
                 .name(pet.getName())
                 .age(pet.getAge())
