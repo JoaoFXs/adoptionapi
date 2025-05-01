@@ -15,11 +15,12 @@ public class PetUpdateDTO {
     private String name;
     private Integer age;
     private String type;
-    private Boolean breed;
+    private String breed;
     private String sex;
     private String size;
     private Double weight;
     private byte[] photo;
+    private String photoBase64;
     private Boolean neutered;
     private Boolean vaccinated;
     private Boolean dewormed;

@@ -15,7 +15,7 @@ public class PetDTO {
     private String name;
     private int age;
     private String type;
-    private boolean breed;
+    private String breed;
     private String sex;
     private String size;
     private Double weight;

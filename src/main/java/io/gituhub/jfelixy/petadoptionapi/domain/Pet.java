@@ -8,10 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,7 +42,7 @@ public class Pet {
     private TypeEnum type;
 
     @Column
-    private boolean breed;
+    private String breed;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -53,14 +55,9 @@ public class Pet {
     @Column
     private Double weight;
 
-    @Transient    // This field is not persisted in the database
-    private String photoBase64;  // Base64 encoded photo (string)
-
     @Column
     @Lob
     private byte[] photo;  // Actual photo as byte array
-
-
 
 
     @Column

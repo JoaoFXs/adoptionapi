@@ -33,7 +33,7 @@ public class PetController {
 
     private static final Logger log = LoggerFactory.getLogger(PetController.class);
     @PostMapping
-    public ResponseEntity savePet(@RequestBody Pet pet){
+    public ResponseEntity savePet(@RequestBody PetUpdateDTO pet){
 
         Pet petT = mapper.petMapperDefault(pet);
 
@@ -120,6 +120,14 @@ public class PetController {
     }
 
     public Pet updatePetFromDto(Pet pet, PetUpdateDTO dto) {
+
+        byte[] photoByte;
+
+        if(dto.getPhoto() == null && dto.getPhotoBase64() != null){
+            photoByte = PetMapper.base64toByte(dto.getPhotoBase64());
+        }else{
+            photoByte = dto.getPhoto();
+        }
         if (dto.getName() != null) pet.setName(dto.getName());
         if (dto.getAge() != null) pet.setAge(dto.getAge());
         if (dto.getType() != null) pet.setType(TypeEnum.valueOf(dto.getType()));
@@ -127,7 +135,7 @@ public class PetController {
         if (dto.getSex() != null) pet.setSex(SexEnum.valueOf(dto.getSex()));
         if (dto.getSize() != null) pet.setSize(SizeEnum.valueOf(dto.getSize()));
         if (dto.getWeight() != null) pet.setWeight(dto.getWeight());
-        if (dto.getPhoto() != null) pet.setPhoto(dto.getPhoto());
+        if (dto.getPhotoBase64() != null) pet.setPhoto(photoByte);
         if (dto.getNeutered() != null) pet.setNeutered(dto.getNeutered());
         if (dto.getVaccinated() != null) pet.setVaccinated(dto.getVaccinated());
         if (dto.getDewormed() != null) pet.setDewormed(dto.getDewormed());
