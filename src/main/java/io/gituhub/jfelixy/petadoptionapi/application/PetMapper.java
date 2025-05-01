@@ -12,17 +12,30 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 
+/**
+ * Mapper class responsible for converting between PetUpdateDTO, Pet, and PetDTO objects.
+ */
 @Component
 public class PetMapper {
 
-    public Pet petMapperDefault(PetUpdateDTO pet){
+    /**
+     * Maps a PetUpdateDTO object to a Pet entity.
+     * If the photo in byte array is null but a base64 string is provided, it decodes the base64 to bytes.
+     * @param pet the incoming PetUpdateDTO
+     * @return a mapped Pet entity
+     */
+    public Pet petMapperDefault(PetUpdateDTO pet) {
         byte[] photoByte;
 
-        if(pet.getPhoto() == null && pet.getPhotoBase64() != null){
+        // If the byte array photo is null but a base64 string is provided, decode the base64 string
+        if (pet.getPhoto() == null && pet.getPhotoBase64() != null) {
             photoByte = base64toByte(pet.getPhotoBase64());
-        }else{
+        } else {
+            // Otherwise, use the provided byte array photo
             photoByte = pet.getPhoto();
         }
+
+        // Build and return the Pet entity using the builder pattern
         Pet petMapped = Pet
                 .builder()
                 .name(pet.getName())
@@ -49,15 +62,18 @@ public class PetMapper {
                 .microchip(pet.getMicrochip())
                 .notes(pet.getNotes())
                 .tags(pet.getTags())
-                .build()
-                ;
+                .build();
         return petMapped;
     }
 
-
-    public PetDTO petMapperDTO(Pet pet, String url){
-
-
+    /**
+     * Maps a Pet entity and an image URL to a PetDTO object.
+     * @param pet the Pet entity
+     * @param url the URL for accessing the pet's image
+     * @return a mapped PetDTO
+     */
+    public PetDTO petMapperDTO(Pet pet, String url) {
+        // Build and return the PetDTO object using the builder pattern
         PetDTO petMapped = PetDTO
                 .builder()
                 .url(url)
@@ -85,12 +101,16 @@ public class PetMapper {
                 .microchip(pet.isMicrochip())
                 .notes(pet.getNotes())
                 .tags(pet.getTags())
-                .build()
-                ;
+                .build();
         return petMapped;
     }
 
-    public static byte[] base64toByte(String base64){
+    /**
+     * Converts a Base64 encoded string into a byte array.
+     * @param base64 the Base64 string
+     * @return the decoded byte array
+     */
+    public static byte[] base64toByte(String base64) {
         return Base64.getDecoder().decode(base64);
     }
 }
