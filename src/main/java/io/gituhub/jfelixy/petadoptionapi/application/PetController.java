@@ -127,10 +127,13 @@ public class PetController {
     /**
      * Handles HTTP DELETE to delete a pet.
      * @param id pet's ID
-     * @return HTTP 200 OK
+     * @return HTTP 200 OK or 404 not found
      */
     @DeleteMapping("/{id}")
     public ResponseEntity deletePet(@PathVariable String id){
+        if (!service.findByID(id).isPresent()){
+            return ResponseEntity.notFound().build();
+        }
         service.delete(id);
         return ResponseEntity.ok().build();
     }
