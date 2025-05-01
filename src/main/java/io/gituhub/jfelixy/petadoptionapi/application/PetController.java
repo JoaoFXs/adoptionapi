@@ -139,7 +139,7 @@ public class PetController {
         }
         service.delete(id);
         log.info("The user deleted the following pet {} with id {}", pet.get().getName(), pet.get().getId());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     /**
