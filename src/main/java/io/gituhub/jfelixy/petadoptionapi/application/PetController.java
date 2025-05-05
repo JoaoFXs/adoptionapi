@@ -1,11 +1,10 @@
 package io.gituhub.jfelixy.petadoptionapi.application;
 
-import io.gituhub.jfelixy.petadoptionapi.domain.Pet;
+import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SizeEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.TemperamentEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.TypeEnum;
-import io.gituhub.jfelixy.petadoptionapi.service.PetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URLConnection;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -219,7 +217,7 @@ public class PetController {
         if (dto.getSocialWith() != null) pet.setSocialWith(dto.getSocialWith());
         if (dto.getAvailable() != null) pet.setAvailable(dto.getAvailable());
         if (dto.getAvailabilityDate() != null) pet.setAvailabilityDate(dto.getAvailabilityDate());
-        if (dto.getAdoptedBy() != null) pet.setAdoptedBy(dto.getAdoptedBy());
+        if (dto.getAdoptedBy() != null) pet.setAdoptedByUser(null);
         if (dto.getAdoptionDate() != null) pet.setAdoptionDate(dto.getAdoptionDate());
         if (dto.getRescueLocation() != null) pet.setRescueLocation(dto.getRescueLocation());
         if (dto.getHistory() != null) pet.setHistory(dto.getHistory());

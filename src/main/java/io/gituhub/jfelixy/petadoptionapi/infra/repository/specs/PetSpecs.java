@@ -1,6 +1,6 @@
 package io.gituhub.jfelixy.petadoptionapi.infra.repository.specs;
 
-import io.gituhub.jfelixy.petadoptionapi.domain.Pet;
+import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 import org.springframework.data.jpa.domain.Specification;
 
 public class PetSpecs {

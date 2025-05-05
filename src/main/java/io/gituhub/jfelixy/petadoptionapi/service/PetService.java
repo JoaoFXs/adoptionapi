@@ -1,6 +1,6 @@
 package io.gituhub.jfelixy.petadoptionapi.service;
 
-import io.gituhub.jfelixy.petadoptionapi.domain.Pet;
+import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 
 import java.util.List;
 import java.util.Optional;

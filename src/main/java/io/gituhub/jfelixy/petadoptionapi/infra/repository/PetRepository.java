@@ -1,8 +1,7 @@
 package io.gituhub.jfelixy.petadoptionapi.infra.repository;
 
-import io.gituhub.jfelixy.petadoptionapi.domain.Pet;
+import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specification.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

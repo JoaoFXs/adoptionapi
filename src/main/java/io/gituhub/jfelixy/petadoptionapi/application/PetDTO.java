@@ -1,5 +1,6 @@
 package io.gituhub.jfelixy.petadoptionapi.application;
 
+import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Builder;
@@ -30,7 +31,7 @@ public class PetDTO {
     private String socialWith;
     private boolean available;
     private LocalDateTime availabilityDate;
-    private String adoptedBy;
+    private Pet adoptedByUser;
     private LocalDate adoptionDate;
     private String rescueLocation;
     private String history;

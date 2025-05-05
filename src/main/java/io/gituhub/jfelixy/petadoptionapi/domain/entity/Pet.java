@@ -1,4 +1,4 @@
-package io.gituhub.jfelixy.petadoptionapi.domain;
+package io.gituhub.jfelixy.petadoptionapi.domain.entity;
 
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SizeEnum;
@@ -8,16 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Base64;
 
 @Entity
 @Table(name= "pets")
@@ -89,8 +85,9 @@ public class Pet {
     @CreatedDate
     private LocalDateTime availabilityDate;
 
-    @Column
-    private String adoptedBy;
+    @ManyToOne
+    @JoinColumn(name = "adopted_by_user_id")
+    private User adoptedByUser;
 
     @Column
     private LocalDate adoptionDate;
