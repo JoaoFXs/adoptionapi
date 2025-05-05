@@ -1,8 +1,8 @@
-package io.gituhub.jfelixy.imagevaultapi.config;
+package io.gituhub.jfelixy.petadoptionapi.config;
 
-import io.gituhub.jfelixy.imagevaultapi.application.jwt.JwtService;
-import io.gituhub.jfelixy.imagevaultapi.config.filter.JwtFilter;
-import io.gituhub.jfelixy.imagevaultapi.domain.service.UserService;
+import io.gituhub.jfelixy.petadoptionapi.application.jwt.JwtService;
+import io.gituhub.jfelixy.petadoptionapi.config.filter.JwtFilter;
+import io.gituhub.jfelixy.petadoptionapi.domain.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     //Configuration auth requests
                     auth.requestMatchers("/v1/users/**").permitAll();//All of users urls permit requests
-                    auth.requestMatchers(HttpMethod.GET, "/v1/images/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/v1/pet/**").permitAll();
                     auth.anyRequest().authenticated();//Any other transition requires authentication.
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

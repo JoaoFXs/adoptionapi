@@ -1,5 +1,7 @@
 package io.gituhub.jfelixy.petadoptionapi.application.users;
 
+import io.gituhub.jfelixy.petadoptionapi.application.jwt.JwtService;
+import io.gituhub.jfelixy.petadoptionapi.domain.AccessToken;
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import io.gituhub.jfelixy.petadoptionapi.domain.exception.DuplicatedTupleException;
 import io.gituhub.jfelixy.petadoptionapi.domain.service.UserService;
@@ -25,6 +27,8 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtService jwtService;
     /**
      * Repository used for accessing User data in the database.
      */
@@ -57,6 +61,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {
         return userRepo.findByEmail(email);
+    }
+
+    @Override
+    public AccessToken authenticate(String email, String password) {
+        var user = getByEmail(email);
+        if(user == null){
+            return null;
+        }
+
+        if (passwordEncoder.matches(password, user.getPassword())){
+            return jwtService.generateToken(user);
+        }
+        return null;
     }
 
     /**
