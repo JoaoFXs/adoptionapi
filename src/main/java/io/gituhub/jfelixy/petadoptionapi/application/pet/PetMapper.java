@@ -1,10 +1,10 @@
 package io.gituhub.jfelixy.petadoptionapi.application.pet;
 
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
-import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;
-import io.gituhub.jfelixy.petadoptionapi.domain.enums.SizeEnum;
-import io.gituhub.jfelixy.petadoptionapi.domain.enums.TemperamentEnum;
-import io.gituhub.jfelixy.petadoptionapi.domain.enums.TypeEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.pet.SexEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.pet.SizeEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.pet.TemperamentEnum;
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.pet.TypeEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;

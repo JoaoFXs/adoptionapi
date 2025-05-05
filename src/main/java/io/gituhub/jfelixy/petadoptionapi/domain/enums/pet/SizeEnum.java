@@ -1,6 +1,5 @@
-package io.gituhub.jfelixy.petadoptionapi.domain.enums;
+package io.gituhub.jfelixy.petadoptionapi.domain.enums.pet;
 
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.Arrays;
