@@ -1,4 +1,4 @@
-package io.gituhub.jfelixy.petadoptionapi.application;
+package io.gituhub.jfelixy.petadoptionapi.application.pet;
 
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 import io.gituhub.jfelixy.petadoptionapi.domain.enums.SexEnum;

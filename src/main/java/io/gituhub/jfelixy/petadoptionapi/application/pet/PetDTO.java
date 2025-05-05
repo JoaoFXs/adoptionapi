@@ -1,7 +1,6 @@
-package io.gituhub.jfelixy.petadoptionapi.application;
+package io.gituhub.jfelixy.petadoptionapi.application.pet;
 
-
-import com.fasterxml.jackson.annotation.JsonInclude;
+import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,31 +9,31 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PetUpdateDTO {
+public class PetDTO {
+    private String id;
+    private String url;
     private String name;
-    private Integer age;
+    private int age;
     private String type;
     private String breed;
     private String sex;
     private String size;
     private Double weight;
     private byte[] photo;
-    private String photoBase64;
-    private Boolean neutered;
-    private Boolean vaccinated;
-    private Boolean dewormed;
+    private boolean neutered;
+    private boolean vaccinated;
+    private boolean dewormed;
     private String diseases;
     private String specialNeeds;
     private String temperament;
     private String socialWith;
-    private Boolean available;
+    private boolean available;
     private LocalDateTime availabilityDate;
-    private String adoptedBy;
+    private Pet adoptedByUser;
     private LocalDate adoptionDate;
     private String rescueLocation;
     private String history;
-    private Boolean microchip;
+    private boolean microchip;
     private String notes;
     private String tags;
 }
