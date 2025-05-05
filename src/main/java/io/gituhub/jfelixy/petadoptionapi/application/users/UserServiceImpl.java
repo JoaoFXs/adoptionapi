@@ -3,6 +3,7 @@ package io.gituhub.jfelixy.petadoptionapi.application.users;
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import io.gituhub.jfelixy.petadoptionapi.domain.exception.DuplicatedTupleException;
 import io.gituhub.jfelixy.petadoptionapi.domain.service.UserService;
+import io.gituhub.jfelixy.petadoptionapi.infra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,12 @@ public class UserServiceImpl implements UserService {
             throw new DuplicatedTupleException("User already exists!");
         }
         encodePassword(user);
-        return userRepository.save(user);
+        return userRepo.save(user);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userRepo.findByEmail(email);
     }
 
     /**

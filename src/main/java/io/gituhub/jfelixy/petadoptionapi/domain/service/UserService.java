@@ -4,4 +4,6 @@ import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 
 public interface UserService {
     User save(User user);
+
+    User getByEmail(String email);
 }
