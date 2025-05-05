@@ -4,8 +4,10 @@ import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import io.gituhub.jfelixy.petadoptionapi.domain.exception.DuplicatedTupleException;
 import io.gituhub.jfelixy.petadoptionapi.domain.service.UserService;
 import io.gituhub.jfelixy.petadoptionapi.infra.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -13,13 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
  * Provides business logic for managing User entities,
  * including saving users with password encryption and duplicate checks.
  */
+@Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     /**
      * Encoder used to hash user passwords before persisting.
      */
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * Repository used for accessing User data in the database.
