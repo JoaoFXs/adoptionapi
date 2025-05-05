@@ -1,6 +1,7 @@
 package io.gituhub.jfelixy.petadoptionapi.application.users;
 
 
+import io.gituhub.jfelixy.petadoptionapi.domain.exception.DuplicatedTupleException;
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
