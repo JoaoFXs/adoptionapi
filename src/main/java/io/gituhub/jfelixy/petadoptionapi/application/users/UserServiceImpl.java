@@ -28,6 +28,9 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private JwtService jwtService;
     /**
      * Repository used for accessing User data in the database.
@@ -54,9 +57,11 @@ public class UserServiceImpl implements UserService {
         if (possibleUser != null){
             throw new DuplicatedTupleException("User already exists!");
         }
+
         encodePassword(user);
         return userRepo.save(user);
     }
+
 
     @Override
     public User getByEmail(String email) {

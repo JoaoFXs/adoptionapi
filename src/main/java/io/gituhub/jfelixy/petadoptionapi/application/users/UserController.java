@@ -51,10 +51,11 @@ public ResponseEntity save(@RequestParam("photo") MultipartFile file,
         RoleEnum userRole = null;
         userRole = RoleEnum.USER;
 
-        UserDTO dto;
-        dto = UserDTO.builder().photo(file.getBytes()).username(username).email(email).role(userRole).password(password).build();
 
-        User user = userMapper.mapToUser(dto);
+        User user = userMapper.mapToUser(file, username, email, password);
+
+        //UserDTO.builder().photo(file).username(username).email(email).role(userRole).password(password).build();
+
         userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }catch (DuplicatedTupleException e){
