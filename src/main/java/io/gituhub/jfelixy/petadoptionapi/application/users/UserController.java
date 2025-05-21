@@ -1,17 +1,18 @@
 package io.gituhub.jfelixy.petadoptionapi.application.users;
 
 
+import io.gituhub.jfelixy.petadoptionapi.domain.enums.user.RoleEnum;
 import io.gituhub.jfelixy.petadoptionapi.domain.exception.DuplicatedTupleException;
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.management.relation.Role;
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -24,17 +25,45 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping
-    public ResponseEntity save(@RequestBody UserDTO dto){
-        try{
-            User user = userMapper.mapToUser(dto);
-            userService.save(user);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }catch (DuplicatedTupleException e){
-            Map<String, String> jsonResult = Map.of("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(jsonResult);
-        }
+//    @PostMapping
+//    public ResponseEntity save(@RequestBody UserDTO dto){
+//
+//        try{
+//            if (dto.getRole() == null) {
+//                dto.setRole(RoleEnum.USER);
+//            }
+//            User user = userMapper.mapToUser(dto);
+//            userService.save(user);
+//            return ResponseEntity.status(HttpStatus.CREATED).build();
+//        }catch (DuplicatedTupleException e){
+//            Map<String, String> jsonResult = Map.of("error", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(jsonResult);
+//        }
+//    }
+@PostMapping
+public ResponseEntity save(@RequestParam("photo") MultipartFile file,
+        @RequestParam("username") String username,
+        @RequestParam("email") String email,
+        @RequestParam("password") String password)
+        {
+
+    try {
+        RoleEnum userRole = null;
+        userRole = RoleEnum.USER;
+
+        UserDTO dto;
+        dto = UserDTO.builder().photo(file.getBytes()).username(username).email(email).role(userRole).password(password).build();
+
+        User user = userMapper.mapToUser(dto);
+        userService.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }catch (DuplicatedTupleException e){
+        Map<String, String> jsonResult = Map.of("error", e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(jsonResult);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
     }
+}
 
     @PostMapping("/auth")
     public ResponseEntity authenticate (@RequestBody CredentialsDTO credentialsDTO){

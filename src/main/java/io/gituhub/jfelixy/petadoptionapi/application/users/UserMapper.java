@@ -11,6 +11,7 @@ public class UserMapper {
                 .username(dto.getUsername())
                 .email(dto.getEmail())
                 .password(dto.getPassword())
+                .photo(dto.getPhoto())
                 .role(dto.getRole())
                 .build();
     }

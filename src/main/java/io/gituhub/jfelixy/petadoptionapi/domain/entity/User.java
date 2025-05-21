@@ -48,6 +48,11 @@ public class User implements UserDetails { // Implements Spring Security's UserD
     @Column(name="created_at")
     private LocalDate createdAt;
 
+    @Column
+    @Lob
+    private byte[] photo;
+
+
     // Returns the authorities/roles granted to the user
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
