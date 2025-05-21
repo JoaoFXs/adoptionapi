@@ -79,7 +79,7 @@ public class JwtService {
 
     //localhost:8080/v1/users/{imageId}
     private URI buildImageURL(User user){
-        String imagePath = "/users/" + user.getId();
+        String imagePath = "/v1/users/" + user.getId();
         return ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .replacePath(imagePath)
