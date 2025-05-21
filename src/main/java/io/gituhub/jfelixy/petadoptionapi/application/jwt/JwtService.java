@@ -5,8 +5,10 @@ import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.crypto.SecretKey;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -45,6 +47,9 @@ public class JwtService {
     private Map<String, Object> generateTokenClaims(User user){
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", user.getUsername());
+        claims.put("photo", user.getPhoto());
+        claims.put("role", user.getRole());
+        claims.put("url", buildImageURL(user));
         return claims;
     }
 
@@ -70,6 +75,16 @@ public class JwtService {
             //Exception for invalid token
             throw new InvalidTokenException(e.getMessage());
         }
+    }
+
+    //localhost:8080/v1/users/{imageId}
+    private URI buildImageURL(User user){
+        String imagePath = "/users/" + user.getId();
+        return ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .replacePath(imagePath)
+                .build()
+                .toUri();
     }
 
 }

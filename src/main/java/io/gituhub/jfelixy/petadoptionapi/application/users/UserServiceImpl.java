@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Implementation of the UserService interface.
  * Provides business logic for managing User entities,
@@ -79,6 +81,10 @@ public class UserServiceImpl implements UserService {
             return jwtService.generateToken(user);
         }
         return null;
+    }
+
+    public Optional<User> getById(String id) {
+        return userRepo.findById(id);
     }
 
     /**
