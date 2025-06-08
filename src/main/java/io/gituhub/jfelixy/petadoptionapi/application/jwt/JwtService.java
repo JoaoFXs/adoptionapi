@@ -47,7 +47,6 @@ public class JwtService {
     private Map<String, Object> generateTokenClaims(User user){
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", user.getUsername());
-        claims.put("photo", user.getPhoto());
         claims.put("role", user.getRole());
         claims.put("url", buildImageURL(user));
         return claims;
