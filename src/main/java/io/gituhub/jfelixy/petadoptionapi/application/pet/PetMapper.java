@@ -80,7 +80,7 @@ public class PetMapper {
                 .type(pet.getType().name())
                 .breed(pet.getBreed())
                 .sex(pet.getSex().name())
-                .size(pet.getSize().name())
+                .size(pet.getSize().getSize())
                 .weight(pet.getWeight())
                 .photo(pet.getPhoto())
                 .neutered(pet.isNeutered())
