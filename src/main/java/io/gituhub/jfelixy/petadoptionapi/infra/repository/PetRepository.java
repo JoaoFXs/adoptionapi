@@ -5,6 +5,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.util.StringUtils;
 import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.PetSpecs.*;
 
@@ -13,6 +14,10 @@ import java.util.List;
 import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.GenericSpecs.conjunction;
 
 public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificationExecutor<Pet> {
+
+    @Query("SELECT DISTINCT p.rescueLocation FROM Pet p")
+    List<String> findAllLocations();
+
     /**
      * @param extension
      * @param query
@@ -37,5 +42,8 @@ public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificati
 
         return findAll(spec);
     }
+
+
+
 
 }

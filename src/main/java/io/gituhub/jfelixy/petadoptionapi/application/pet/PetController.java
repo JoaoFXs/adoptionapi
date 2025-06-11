@@ -140,6 +140,8 @@ public class PetController {
         return ResponseEntity.noContent().build();
     }
 
+
+
     /**
      * Creates HTTP headers for image download.
      * @param responsePet the pet whose image is being sent
@@ -228,4 +230,6 @@ public class PetController {
         // Save updated pet
         return service.save(pet);
     }
+
+
 }

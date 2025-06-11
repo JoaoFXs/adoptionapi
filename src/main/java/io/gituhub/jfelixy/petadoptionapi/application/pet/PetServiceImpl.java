@@ -59,4 +59,9 @@ public class PetServiceImpl implements PetService {
     public void delete(String id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<String> getAllLocations() {
+        return repository.findAllLocations();
+    }
 }
