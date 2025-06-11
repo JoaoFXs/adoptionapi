@@ -60,6 +60,11 @@ public class PetServiceImpl implements PetService {
         repository.deleteById(id);
     }
 
+    /**
+     * Retrieves a list of unique pet locations.
+     * Each location is formatted as a string in the form "address/ city/ province/ cep".
+     * @return a list of formatted location strings
+     */
     @Override
     public List<String> getAllLocations() {
         return repository.findAllLocations();
