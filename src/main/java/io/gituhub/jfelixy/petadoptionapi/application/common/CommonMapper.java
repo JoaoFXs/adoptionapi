@@ -5,11 +5,30 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Component responsible for mapping location strings into structured {@link LocationsJSON} objects.
+ *
+ *
+ */
 @Component
 public class CommonMapper {
 
-    public LocationsJSON mapLocations(String location){
+    /**
+     * Converts a single location string into a {@link LocationsJSON} object.
+     *
+     *
+     *
+     * @param location the location string to be parsed
+     * @return a {@link LocationsJSON} object populated with parsed data
+     * @throws IndexOutOfBoundsException if the input string does not contain four parts
+     */
+    public LocationsJSON mapLocations(String location) {
         List<String> infoAddress = List.of(location.split("/"));
-        return LocationsJSON.builder().address(infoAddress.get(0)).city(infoAddress.get(1)).province(infoAddress.get(2)).cep(infoAddress.get(3)).build();
+        return LocationsJSON.builder()
+                .address(infoAddress.get(0))
+                .city(infoAddress.get(1))
+                .province(infoAddress.get(2))
+                .cep(infoAddress.get(3))
+                .build();
     }
 }

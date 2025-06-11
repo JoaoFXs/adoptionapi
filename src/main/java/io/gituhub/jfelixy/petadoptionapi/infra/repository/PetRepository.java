@@ -14,7 +14,9 @@ import java.util.List;
 import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.GenericSpecs.conjunction;
 
 public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificationExecutor<Pet> {
-
+    /**Retrieves a list of distinct locations from all pets in the database.
+        Each location is returned as a single string formatted as:
+    "address/ city/ province/ cep" **/
     @Query("SELECT DISTINCT CONCAT(p.address, '/ ', p.city, '/ ', p.province, '/ ', p.cep) FROM Pet p")
     List<String> findAllLocations();
 
