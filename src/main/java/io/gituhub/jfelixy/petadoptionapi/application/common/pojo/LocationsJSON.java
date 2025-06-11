@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class LocationsJSON {
+    private String address;
     private String city;
-    private String state;
+    private String cep;
+    private String province;
 }
