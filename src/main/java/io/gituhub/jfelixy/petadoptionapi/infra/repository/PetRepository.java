@@ -15,7 +15,7 @@ import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.GenericSp
 
 public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificationExecutor<Pet> {
 
-    @Query("SELECT DISTINCT p.rescueLocation FROM Pet p")
+    @Query("SELECT DISTINCT p.city FROM Pet p")
     List<String> findAllLocations();
 
     /**

@@ -17,6 +17,7 @@ public class CommonController {
     @Autowired
     PetServiceImpl service;
 
+    @Autowired
     CommonMapper mapper;
 
     @GetMapping("/locations")

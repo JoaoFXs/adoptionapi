@@ -141,7 +141,6 @@ public class PetController {
     }
 
 
-
     /**
      * Creates HTTP headers for image download.
      * @param responsePet the pet whose image is being sent
@@ -221,7 +220,10 @@ public class PetController {
         if (dto.getAvailabilityDate() != null) pet.setAvailabilityDate(dto.getAvailabilityDate());
         if (dto.getAdoptedBy() != null) pet.setAdoptedByUser(null);
         if (dto.getAdoptionDate() != null) pet.setAdoptionDate(dto.getAdoptionDate());
-        if (dto.getRescueLocation() != null) pet.setRescueLocation(dto.getRescueLocation());
+        if (dto.getAddress() != null) pet.setAddress(dto.getAddress());
+        if (dto.getCity() != null) pet.setCity(dto.getCity());
+        if (dto.getCep() != null) pet.setCep(dto.getCep());
+        if (dto.getProvince() != null) pet.setProvince(dto.getProvince());
         if (dto.getHistory() != null) pet.setHistory(dto.getHistory());
         if (dto.getMicrochip() != null) pet.setMicrochip(dto.getMicrochip());
         if (dto.getNotes() != null) pet.setNotes(dto.getNotes());

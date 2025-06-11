@@ -36,4 +36,8 @@ public class PetDTO {
     private boolean microchip;
     private String notes;
     private String tags;
+    private String cep;
+    private String address;
+    private String province;
+    private String city;
 }

@@ -93,7 +93,16 @@ public class Pet {
     private LocalDate adoptionDate;
 
     @Column
-    private String rescueLocation;
+    private String address;
+
+    @Column
+    private String city;
+
+    @Column
+    private String province;
+
+    @Column
+    private String cep;
 
     @Column
     private String history;

@@ -54,7 +54,10 @@ public class PetMapper {
                 .availabilityDate(pet.getAvailabilityDate())
                 .adoptedByUser(null)
                 .adoptionDate(pet.getAdoptionDate())
-                .rescueLocation(pet.getRescueLocation())
+                .city(pet.getCity())
+                .address(pet.getAddress())
+                .cep(pet.getCep())
+                .province(pet.getProvince())
                 .history(pet.getHistory())
                 .microchip(pet.getMicrochip())
                 .notes(pet.getNotes())
@@ -94,11 +97,15 @@ public class PetMapper {
                 .availabilityDate(pet.getAvailabilityDate())
                 .adoptedByUser(null)
                 .adoptionDate(pet.getAdoptionDate())
-                .rescueLocation(pet.getRescueLocation())
                 .history(pet.getHistory())
                 .microchip(pet.isMicrochip())
                 .notes(pet.getNotes())
                 .tags(pet.getTags())
+                .address(pet.getAddress())
+                .cep(pet.getCep())
+                .province(pet.getProvince())
+                .city(pet.getCity())
+
                 .build();
         return petMapped;
     }
