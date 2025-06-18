@@ -20,4 +20,6 @@ public interface PetService {
     List<String> getAllBreeds();
 
     List<String> getAllAges();
+
+    List<String> getAllTypes();
 }

@@ -47,6 +47,9 @@ public class CommonController {
             case "age":
                 result = service.getAllAges();
                 return ResponseEntity.ok(result);
+            case "type":
+                result = service.getAllTypes();
+                return ResponseEntity.ok(result);
             default:
                 return ResponseEntity.badRequest().build();
         }

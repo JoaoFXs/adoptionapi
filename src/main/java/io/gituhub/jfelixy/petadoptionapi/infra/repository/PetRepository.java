@@ -25,6 +25,9 @@ public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificati
 
     @Query("SELECT DISTINCT p.age FROM Pet p")
     List<String> findAllAges();
+
+    @Query("SELECT DISTINCT p.type FROM Pet p")
+    List<String> findAllTypes();
     /**
      * @param extension
      * @param query
