@@ -74,4 +74,9 @@ public class PetServiceImpl implements PetService {
     public List<String> getAllBreeds() {
         return repository.findAllBreeds();
     }
+
+    @Override
+    public List<String> getAllAges() {
+        return repository.findAllAges();
+    }
 }

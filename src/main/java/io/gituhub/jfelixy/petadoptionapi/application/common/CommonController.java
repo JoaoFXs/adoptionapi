@@ -44,7 +44,9 @@ public class CommonController {
                 result = service.getAllBreeds();
 
                 return ResponseEntity.ok(result);
-
+            case "age":
+                result = service.getAllAges();
+                return ResponseEntity.ok(result);
             default:
                 return ResponseEntity.badRequest().build();
         }
