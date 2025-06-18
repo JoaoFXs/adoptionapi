@@ -16,4 +16,6 @@ public interface PetService {
     void delete(String id);
 
     List<String> getAllLocations();
+
+    List<String> getAllBreeds();
 }

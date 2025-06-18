@@ -1,11 +1,10 @@
 package io.gituhub.jfelixy.petadoptionapi.application.common;
 
+import io.gituhub.jfelixy.petadoptionapi.application.common.pojo.LocationsJSON;
 import io.gituhub.jfelixy.petadoptionapi.application.pet.PetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,14 +28,26 @@ public class CommonController {
      *
      * @return ResponseEntity containing a list of LocationsJSON objects
      */
-    @GetMapping("/locations")
-    public ResponseEntity getPetLocations() {
-        List<String> locations = service.getAllLocations();
+    @GetMapping("/{path}")
+    public ResponseEntity getPetLocations(@PathVariable String path) {
+        List<String> result;
+        List<LocationsJSON> parsedResult;
+        switch (path) {
+            case "location":
+                result = service.getAllLocations();
 
-        var parsedLocations = locations.stream()
-                .map(mapper::mapLocations)
-                .collect(java.util.stream.Collectors.toList());
+                parsedResult = result.stream()
+                        .map(mapper::mapLocations)
+                        .collect(java.util.stream.Collectors.toList());
+                return ResponseEntity.ok(parsedResult);
+            case "breed":
+                result = service.getAllBreeds();
 
-        return ResponseEntity.ok(parsedLocations);
+                return ResponseEntity.ok(result);
+
+            default:
+                return ResponseEntity.badRequest().build();
+        }
+
     }
 }

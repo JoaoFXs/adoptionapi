@@ -20,7 +20,8 @@ public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificati
     @Query("SELECT DISTINCT CONCAT(p.address, '/ ', p.city, '/ ', p.province, '/ ', p.cep) FROM Pet p")
     List<String> findAllLocations();
 
-
+    @Query("SELECT DISTINCT p.breed FROM Pet p")
+    List<String> findAllBreeds();
     /**
      * @param extension
      * @param query
