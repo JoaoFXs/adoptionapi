@@ -15,11 +15,5 @@ public interface PetService {
 
     void delete(String id);
 
-    List<String> getAllLocations();
-
-    List<String> getAllBreeds();
-
-    List<String> getAllAges();
-
-    List<String> getAllTypes();
+    List<Object> queryValues(String fieldValue);
 }

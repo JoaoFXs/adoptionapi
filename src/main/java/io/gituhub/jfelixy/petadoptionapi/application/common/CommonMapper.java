@@ -23,12 +23,12 @@ public class CommonMapper {
      * @throws IndexOutOfBoundsException if the input string does not contain four parts
      */
     public LocationsJSON mapLocations(String location) {
-        List<String> infoAddress = List.of(location.split("/"));
+        List<Object> infoAddress = List.of(location.split("/"));
         return LocationsJSON.builder()
-                .address(infoAddress.get(0))
-                .city(infoAddress.get(1))
-                .province(infoAddress.get(2))
-                .cep(infoAddress.get(3))
+                .address((String) infoAddress.get(0))
+                .city((String) infoAddress.get(1))
+                .province((String) infoAddress.get(2))
+                .cep((String) infoAddress.get(3))
                 .build();
     }
 }

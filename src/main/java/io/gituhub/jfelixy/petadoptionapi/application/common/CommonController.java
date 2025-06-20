@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * REST controller responsible for exposing common/shared endpoints across the application.
@@ -30,25 +31,27 @@ public class CommonController {
      */
     @GetMapping("/{path}")
     public ResponseEntity getPetLocations(@PathVariable String path) {
-        List<String> result;
+        List<Object> result;
         List<LocationsJSON> parsedResult;
         switch (path) {
             case "location":
-                result = service.getAllLocations();
-
+                result = service.queryValues(path);
                 parsedResult = result.stream()
-                        .map(mapper::mapLocations)
-                        .collect(java.util.stream.Collectors.toList());
+                        .map(r -> mapper.mapLocations((String) r))
+                        .collect(Collectors.toList());
+
                 return ResponseEntity.ok(parsedResult);
             case "breed":
-                result = service.getAllBreeds();
-
+                result = service.queryValues(path);
                 return ResponseEntity.ok(result);
             case "age":
-                result = service.getAllAges();
+                result = service.queryValues(path);
                 return ResponseEntity.ok(result);
             case "type":
-                result = service.getAllTypes();
+                result = service.queryValues(path);
+                return ResponseEntity.ok(result);
+            case "sex":
+                result = service.queryValues(path);
                 return ResponseEntity.ok(result);
             default:
                 return ResponseEntity.badRequest().build();
