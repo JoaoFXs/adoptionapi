@@ -2,6 +2,7 @@ package io.gituhub.jfelixy.petadoptionapi.application.common;
 
 import io.gituhub.jfelixy.petadoptionapi.application.common.pojo.LocationsJSON;
 import io.gituhub.jfelixy.petadoptionapi.application.pet.PetServiceImpl;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,29 +34,30 @@ public class CommonController {
     public ResponseEntity getPetLocations(@PathVariable String path) {
         List<Object> result;
         List<LocationsJSON> parsedResult;
-        switch (path) {
-            case "location":
-                result = service.queryValues(path);
-                parsedResult = result.stream()
-                        .map(r -> mapper.mapLocations((String) r))
-                        .collect(Collectors.toList());
 
-                return ResponseEntity.ok(parsedResult);
-            case "breed":
-                result = service.queryValues(path);
-                return ResponseEntity.ok(result);
-            case "age":
-                result = service.queryValues(path);
-                return ResponseEntity.ok(result);
-            case "type":
-                result = service.queryValues(path);
-                return ResponseEntity.ok(result);
-            case "sex":
-                result = service.queryValues(path);
-                return ResponseEntity.ok(result);
-            default:
-                return ResponseEntity.badRequest().build();
+        List<Object> valuesAllow = List.of(
+                "age",
+                "type",
+                "breed",
+                "sex",
+                "size",
+                "temperament",
+                "location"
+        );
+
+        if (!valuesAllow.contains(path)) return ResponseEntity.notFound().build();
+
+        if (path.equalsIgnoreCase("location")) {
+            result = service.queryValues(path);
+            parsedResult = result.stream()
+                    .map(r -> mapper.mapLocations((String) r))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(parsedResult);
         }
+
+        result = service.queryValues(path);
+        return ResponseEntity.ok(result);
 
     }
 }
