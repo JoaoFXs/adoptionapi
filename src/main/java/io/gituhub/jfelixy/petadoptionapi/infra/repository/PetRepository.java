@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.util.StringUtils;
 import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.PetSpecs.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.GenericSpecs.conjunction;
@@ -26,33 +27,44 @@ public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificati
      *
      * SELECT * FROM IMAGE WHERE 1 = 1 AND AVAILABLE = boolean AND (NAME LIKE 'QUERY' OR TAGS LIKE 'QUERY')
      * */
-    default List<Pet> findByAvailableAndNameOrTagsLike(String available, String query){
+    default List<Pet> findByAvailableAndNameOrTagsLike(String available, String query) {
         Specification<Pet> spec = Specification.where(conjunction());
 
-
-        // AND AVAILABLE = true
-
-        if(available != null) {
+        // Filtro por disponibilidade
+        if (available != null) {
             boolean availableBoolean = Boolean.parseBoolean(available);
             spec = spec.and(availableEqual(availableBoolean));
         }
 
-        if(StringUtils.hasText(query)){
-            spec = spec.and(Specification.anyOf(
-                    fieldLike("name",query),
-                    fieldLike("sex",query),
-                    fieldLike("size",query),
-                    fieldLike("type",query),
-                    fieldLike("tags",query),
-                    fieldLike("temperament", query),
-                    fieldLike("address",query),
-                    fieldLike("city",query),
-                    fieldLike("province",query)));
+        if (StringUtils.hasText(query)) {
+            String[] queryParts = query.split("\\s*,\\s*"); // divide por vírgula e remove espaços
+            List<Specification<Pet>> querySpecs = new ArrayList<>();
+
+            for (String part : queryParts) {
+                querySpecs.add(Specification.anyOf(
+                        fieldLike("name", part),
+                        fieldLike("sex", part),
+                        fieldLike("size", part),
+                        fieldLike("type", part),
+                        fieldLike("tags", part),
+                        fieldLike("temperament", part),
+                        fieldLike("address", part),
+                        fieldLike("city", part),
+                        fieldLike("province", part)
+                ));
+            }
+
+            // Junta todos os anyOf com OR
+            Specification<Pet> combinedQuerySpec = Specification.where(querySpecs.get(0));
+            for (int i = 1; i < querySpecs.size(); i++) {
+                combinedQuerySpec = combinedQuerySpec.or(querySpecs.get(i));
+            }
+
+            spec = spec.and(combinedQuerySpec);
         }
 
         return findAll(spec);
     }
-
 
 
 
