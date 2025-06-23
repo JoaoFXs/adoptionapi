@@ -38,7 +38,16 @@ public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificati
         }
 
         if(StringUtils.hasText(query)){
-            spec = spec.and(Specification.anyOf(nameLike(query),tagsLike(query)));
+            spec = spec.and(Specification.anyOf(
+                    fieldLike("name",query),
+                    fieldLike("sex",query),
+                    fieldLike("size",query),
+                    fieldLike("type",query),
+                    fieldLike("tags",query),
+                    fieldLike("temperament", query),
+                    fieldLike("address",query),
+                    fieldLike("city",query),
+                    fieldLike("province",query)));
         }
 
         return findAll(spec);
