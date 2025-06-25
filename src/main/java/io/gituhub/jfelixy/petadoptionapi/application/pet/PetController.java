@@ -63,10 +63,12 @@ public class PetController {
      * @return list of pets matching the search
      */
     @GetMapping
-    public ResponseEntity<List<PetDTO>> searchPets(
+    public ResponseEntity<?> searchPets(
             @RequestParam(value="available", required = false) String available,
             @RequestParam(value="query", required = false) String query){
-
+        if (query == null || query.trim().isEmpty()){
+            return ResponseEntity.badRequest().body("Query is mandatory");
+        }
         // Perform search using the service
         var result = service.search(available, query);
 
