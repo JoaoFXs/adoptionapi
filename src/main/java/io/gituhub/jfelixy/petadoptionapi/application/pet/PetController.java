@@ -79,7 +79,11 @@ public class PetController {
         // Return 200 OK with list of pets
         return ResponseEntity.ok(pets);
     }
-
+    /**
+     * Handles HTTP GET to search for pets by ID.
+     * @param id filter by Id
+     * @return pet matching the search
+     */
     @GetMapping("/search")
     public ResponseEntity<?> searchPetsByID(@RequestParam(value = "id") String id) {
         if (id == null || id.trim().isEmpty()) {
