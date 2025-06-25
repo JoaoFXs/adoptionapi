@@ -31,7 +31,7 @@ public class CommonController {
      * @return ResponseEntity containing a list of LocationsJSON objects
      */
     @GetMapping("/{path}")
-    public ResponseEntity getPetLocations(@PathVariable String path) {
+    public ResponseEntity getFields(@PathVariable String path) {
         List<Object> result;
         List<LocationsJSON> parsedResult;
 

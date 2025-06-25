@@ -43,6 +43,7 @@ public interface PetRepository extends JpaRepository<Pet,String>, JpaSpecificati
             for (String part : queryParts) {
                 querySpecs.add(Specification.anyOf(
                         fieldLike("name", part),
+                        fieldLike("breed", part),
                         fieldLike("sex", part),
                         fieldLike("size", part),
                         fieldLike("type", part),
