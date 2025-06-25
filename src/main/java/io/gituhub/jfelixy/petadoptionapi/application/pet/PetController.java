@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -78,6 +79,28 @@ public class PetController {
         // Return 200 OK with list of pets
         return ResponseEntity.ok(pets);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchPetsByID(@RequestParam(value = "id") String id) {
+        if (id == null || id.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("The parameter 'id' is mandatory.");
+        }
+
+        Optional<Pet> optionalPet = service.findByID(id);
+
+        if (optionalPet.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet not find with id: " + id);
+        }
+
+        Pet result = optionalPet.get();
+        URI url = buildPetImageURL(result);
+        PetDTO dto = mapper.petMapperDTO(result, String.valueOf(url));
+
+        return ResponseEntity.ok(dto);
+    }
+
+
+
 
     /**
      * Handles HTTP GET to retrieve a pet's image by ID.
