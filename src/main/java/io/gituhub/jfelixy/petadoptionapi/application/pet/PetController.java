@@ -50,7 +50,7 @@ public class PetController {
         Pet petSaved = service.save(mappedPet);
 
         // Build URI to access the pet image
-        URI url = buildPetImageURL(petSaved);
+        URI url = buildPetImageURL(petSaved, "");
 
         // Return 201 Created with Location header
         return ResponseEntity.created(url).build();
@@ -74,7 +74,7 @@ public class PetController {
 
         // Map results to DTO including image URL
         var pets = result.stream().map(pet -> {
-            var url = buildPetImageURL(pet);
+            var url = buildPetImageURL(pet, "search");
             return mapper.petMapperDTO(pet, url.toString());
         }).collect(java.util.stream.Collectors.toList());
 
@@ -99,7 +99,7 @@ public class PetController {
         }
 
         Pet result = optionalPet.get();
-        URI url = buildPetImageURL(result);
+        URI url = buildPetImageURL(result, "search");
         PetDTO dto = mapper.petMapperDTO(result, String.valueOf(url));
 
         return ResponseEntity.ok(dto);
@@ -207,11 +207,31 @@ public class PetController {
      * @param pet the pet
      * @return URI pointing to /v1/pet/{id}
      */
-    private URI buildPetImageURL(Pet pet){
+    private URI buildPetImageURL(Pet pet, String type) {
         String imagePath = "/" + pet.getId();
-        return ServletUriComponentsBuilder.fromCurrentRequestUri().path(imagePath).build().toUri();
-    }
+        ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequestUri();
 
+        if (type.contains("search")) {
+            // Obtém os segmentos do caminho atual
+            List<String> segments = builder.build().getPathSegments();
+
+            // Remove o último segmento se for "search"
+            if (!segments.isEmpty() && "search".equals(segments.get(segments.size() - 1))) {
+                segments = segments.subList(0, segments.size() - 1);
+            }
+
+            // Reconstrói o builder sem o segmento "search"
+            builder.replacePath("");
+            for (String segment : segments) {
+                builder.pathSegment(segment);
+            }
+        }
+
+        // Adiciona o caminho da imagem
+        builder.path(imagePath);
+
+        return builder.build().toUri();
+    }
     /**
      * Updates a Pet entity using a DTO.
      * Maps each field only if the DTO contains a value.
