@@ -44,6 +44,8 @@ public class AdoptionRequestServiceImpl implements AdoptionRequestService {
 
     @Override
     public AdoptionRequest updateStatus(String requestId, AdoptionRequest.Status status) {
+        var request = requestRepository.findById(requestId);
+        request.get().setStatus(status);
         return null;
     }
 }
