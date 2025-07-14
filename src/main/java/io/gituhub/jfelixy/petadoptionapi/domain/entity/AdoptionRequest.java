@@ -10,6 +10,7 @@ import org.springframework.cglib.core.Local;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name="adoption_requests")
@@ -31,14 +32,18 @@ public class AdoptionRequest {
 
     @ManyToOne
     @JoinColumn(name = "pet_id", nullable = false)
-    private Pet pet;//Pet vinculado a request
+    private Optional<Pet> pet;//Pet vinculado a request
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User applicant; // Usuário que solicitou a adoção
+    private Optional<User> applicant; // Usuário que solicitou a adoção
 
     @Column(nullable = false)
     private String fullName;
+
+
+    @Column(nullable = false)
+    private String phone;
 
     @Column(nullable = false)
     private String email;
@@ -46,7 +51,7 @@ public class AdoptionRequest {
     @Column(nullable = false)
     private boolean hasChildren;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String petExperience;
 
     @Column(nullable = false)
@@ -55,6 +60,8 @@ public class AdoptionRequest {
     @Column(updatable = false)
     private LocalDateTime date = LocalDateTime.now();
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String adoptionReason;
     @Enumerated
     @Builder.Default
     private Status status = Status.PENDING;
