@@ -50,7 +50,7 @@ public class AdoptionRequest {
     private String petExperience;
 
     @Column(nullable = false)
-    private String residence;
+    private String residenceType;
 
     @Column(updatable = false)
     private LocalDateTime date = LocalDateTime.now();
