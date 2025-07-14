@@ -43,6 +43,9 @@ public class User implements UserDetails { // Implements Spring Security's UserD
     // "adoptedByUser" is the field name in Pet class that maps back to User
     @OneToMany(mappedBy = "adoptedByUser")
     private List<Pet> adoptedPets;
+    //Adicione mapeamento para solicitações feitas pelo usuário
+    @OneToMany(mappedBy = "applicant")
+    private List<AdoptionRequest> adoptionRequests;
 
     @CreatedDate
     @Column(name="created_at")

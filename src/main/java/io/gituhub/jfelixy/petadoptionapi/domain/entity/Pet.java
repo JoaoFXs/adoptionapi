@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name= "pets")
@@ -88,6 +89,9 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "adopted_by_user_id")
     private User adoptedByUser;
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    private List<AdoptionRequest> adoptionRequests;
 
     @Column
     private LocalDate adoptionDate;
