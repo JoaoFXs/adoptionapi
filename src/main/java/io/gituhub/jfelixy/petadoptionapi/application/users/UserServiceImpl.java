@@ -5,7 +5,7 @@ import io.gituhub.jfelixy.petadoptionapi.domain.AccessToken;
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.User;
 import io.gituhub.jfelixy.petadoptionapi.domain.exception.DuplicatedTupleException;
 import io.gituhub.jfelixy.petadoptionapi.domain.service.UserService;
-import io.gituhub.jfelixy.petadoptionapi.infra.repository.UserRepository;
+import io.gituhub.jfelixy.petadoptionapi.infra.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

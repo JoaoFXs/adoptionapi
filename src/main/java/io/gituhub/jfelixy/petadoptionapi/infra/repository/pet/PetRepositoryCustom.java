@@ -1,4 +1,4 @@
-package io.gituhub.jfelixy.petadoptionapi.infra.repository;
+package io.gituhub.jfelixy.petadoptionapi.infra.repository.pet;
 
 import java.util.List;
 

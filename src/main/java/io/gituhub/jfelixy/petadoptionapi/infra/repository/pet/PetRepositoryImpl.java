@@ -1,4 +1,4 @@
-package io.gituhub.jfelixy.petadoptionapi.infra.repository;
+package io.gituhub.jfelixy.petadoptionapi.infra.repository.pet;
 
 
 import jakarta.persistence.EntityManager;
@@ -6,7 +6,6 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Objects;
 
 
 /** Marca a classe como parte da camada de persistência,

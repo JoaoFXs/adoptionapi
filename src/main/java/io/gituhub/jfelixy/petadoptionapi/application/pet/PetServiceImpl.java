@@ -1,7 +1,7 @@
 package io.gituhub.jfelixy.petadoptionapi.application.pet;
 
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
-import io.gituhub.jfelixy.petadoptionapi.infra.repository.PetRepository;
+import io.gituhub.jfelixy.petadoptionapi.infra.repository.pet.PetRepository;
 import io.gituhub.jfelixy.petadoptionapi.domain.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

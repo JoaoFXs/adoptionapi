@@ -1,14 +1,10 @@
-package io.gituhub.jfelixy.petadoptionapi.infra.repository;
+package io.gituhub.jfelixy.petadoptionapi.infra.repository.pet;
 
 import io.gituhub.jfelixy.petadoptionapi.domain.entity.Pet;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.util.StringUtils;
 import static io.gituhub.jfelixy.petadoptionapi.infra.repository.specs.PetSpecs.*;
 
