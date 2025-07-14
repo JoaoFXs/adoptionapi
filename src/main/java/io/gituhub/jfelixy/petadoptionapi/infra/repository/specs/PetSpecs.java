@@ -19,4 +19,7 @@ public class PetSpecs {
 
     }
 
+    public static Specification <Pet> queryLike(String query){
+        return (root, query1, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.upper(root.get("name")), "%" + query.toUpperCase() + "%");
+    }
 }
