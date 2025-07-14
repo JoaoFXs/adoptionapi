@@ -39,7 +39,7 @@ public class AdoptionRequestServiceImpl implements AdoptionRequestService {
 
     @Override
     public List<AdoptionRequest> getPendingRequests() {
-        return List.of();
+        return requestRepository.findByStatus(AdoptionRequest.Status.PENDING);
     }
 
     @Override
