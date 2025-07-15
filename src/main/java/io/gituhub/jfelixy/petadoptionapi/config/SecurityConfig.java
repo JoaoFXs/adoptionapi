@@ -47,6 +47,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/v1/users/**").permitAll();//All of users urls permit requests
                     auth.requestMatchers(HttpMethod.GET, "/v1/pet/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET,"/v1/common/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/v1/adoption-requests/**").hasRole("ADMIN");
                     auth.anyRequest().authenticated();//Any other transition requires authentication.
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
