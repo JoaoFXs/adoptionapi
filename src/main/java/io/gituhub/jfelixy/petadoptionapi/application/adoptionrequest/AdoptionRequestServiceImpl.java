@@ -10,14 +10,20 @@ import io.gituhub.jfelixy.petadoptionapi.infra.repository.adoptionrequest.Adopti
 import io.gituhub.jfelixy.petadoptionapi.infra.repository.pet.PetRepository;
 import io.gituhub.jfelixy.petadoptionapi.infra.repository.user.UserRepository;
 import org.hibernate.annotations.NotFound;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdoptionRequestServiceImpl implements AdoptionRequestService {
 
+    @Autowired
     private AdoptionRequestRepository requestRepository;
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private PetRepository petRepository;
 
     @Override
@@ -32,8 +38,8 @@ public class AdoptionRequestServiceImpl implements AdoptionRequestService {
         if(pet.isEmpty()) throw new IdNotFound("Pet not found whilte creating request");
 
         AdoptionRequest request = AdoptionRequest.builder()
-                .applicant(user)
-                .pet(pet)
+                .applicant(user.get())
+                .pet(pet.get())
                 .fullName(dto.getFullName())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())

@@ -1,16 +1,14 @@
 package io.gituhub.jfelixy.petadoptionapi.domain.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Entity
 @Table(name="adoption_requests")
@@ -32,11 +30,12 @@ public class AdoptionRequest {
 
     @ManyToOne
     @JoinColumn(name = "pet_id", nullable = false)
-    private Optional<Pet> pet;//Pet vinculado a request
+    @JsonIgnore
+    private Pet pet;//Pet vinculado a request
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Optional<User> applicant; // Usuário que solicitou a adoção
+    private User applicant; // Usuário que solicitou a adoção
 
     @Column(nullable = false)
     private String fullName;
