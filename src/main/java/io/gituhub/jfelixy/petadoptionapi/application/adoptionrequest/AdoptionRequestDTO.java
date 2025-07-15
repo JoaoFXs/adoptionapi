@@ -23,5 +23,8 @@ public class AdoptionRequestDTO {
     private String residenceType;
     private boolean hasChildren;
     private String adoptionReason;
+    private String pet_id;
+    private String user_id;
+    private String status;
 
 }

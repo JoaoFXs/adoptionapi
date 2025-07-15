@@ -18,13 +18,12 @@ public class AdoptionRequestController {
     private RequestMapper requestMapper;
 
     @PostMapping
-    public ResponseEntity<AdoptionRequest> createRequest(
+    public ResponseEntity<AdoptionRequestDTO> createRequest(
             @RequestBody AdoptionRequestDTO dto,
             @RequestParam String userId,
             @RequestParam String petId){
 
-
-        return ResponseEntity.ok(service.createRequest(dto, userId, petId));
+        return ResponseEntity.ok(requestMapper.mapRequesttoDTO(service.createRequest(dto, userId, petId)));
     }
 
 }
